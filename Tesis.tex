@@ -1,0 +1,159 @@
+% !TeX document-id = {041f4270-ff29-4194-ac21-3def5a3e2038}
+% !TeX encoding = UTF-8
+% !TeX spellcheck = es_ES
+% !TeX root = Tesis.tex
+\documentclass[12pt,oneside,openleft]{book}
+
+\usepackage{soulutf8}
+\usepackage{easyReview}
+
+\usepackage[letterpaper,lmargin=2.9cm,rmargin=1.9cm,bmargin=2.8cm,tmargin=2.8cm,includeheadfoot]{geometry} % adjusts page layout, showframe
+
+\usepackage{graphicx}  % Add graphics capabilities
+\graphicspath{/figures/}
+\usepackage{tikz, tikz-3dplot}
+\usepackage{flafter}  % Don't place floats before their definition
+\usepackage[list=off,font=small,skip=3pt]{caption}
+\usepackage{subcaption}
+
+\usepackage{lipsum}
+\usepackage{float}
+
+%\usepackage{natbib} % use author/date bibliographic citations
+\usepackage{cite}
+
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb}  % Better maths support & more symbols
+\usepackage{textcomp} % provide lots of new symbols
+\usepackage{bm}  % Define \bm{} to use bold math fonts
+
+\usepackage[utf8]{inputenc} % Any characters can be typed directly from the keyboard
+%\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{longtable}
+
+\usepackage{booktabs}
+\setlength{\tabcolsep}{4pt} % General space between cols (6pt standard)
+\renewcommand{\arraystretch}{1} % General space between rows (1 standard)
+
+\usepackage{enumitem}
+\setlist{itemsep=0.5pt}%nolistsep
+
+
+\usepackage[plain]{fancyref}
+\usepackage[bookmarksopen,colorlinks,pdftex]{hyperref}  % PDF hyperlinks
+\hypersetup{citecolor=black,
+	        filecolor=black,
+	        linkcolor=black,
+	        urlcolor=black} % black links, for printed output
+
+\usepackage{fancyhdr}
+\fancyhead{\headheight = 14pt}
+\fancyhead[LE,RO]{} %\slshape \nouppercase{\rightmark}}
+\fancyhead[LO,RE]{\slshape \nouppercase{\leftmark}}
+\fancyfoot[C]{\thepage}
+
+\usepackage{aas_macros} %para bibliografía \apj, etc
+\usepackage[]{tocbibind} % [nottoc] para remover el indice del toc
+
+%\renewcommand{\baselinestretch}{1.5} % para cambiar interlineado
+\usepackage{setspace}
+%\usepackage{ieeetran}
+
+\setcounter{secnumdepth}{4} % para numerar subsubsections y parrafos y agregar al toc
+\setcounter{tocdepth}{4}
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+
+\usepackage{multirow}
+\newcommand{\sfref}[1]{{\bfseries figura suplementaria \ref{#1}}}
+%\newcommand{\Sfref}[1]{Supplementary figure \ref{#1}}
+\newcommand{\stref}[1]{{\bfseries tabla suplementaria \ref{#1}}}
+\newcommand{\stsref}[2]{{\bfseries tablas suplementarias \ref{#1} y \ref{#2}}}
+\definecolor{tcA}{rgb}{0.811765,0.811765,0.811765}
+
+\makeatletter %eqs en negrita si el texto q lo rodea lo está
+\DeclareRobustCommand*{\bfseries}{%
+  \not@math@alphabet\bfseries\mathbf
+  \fontseries\bfdefault\selectfont
+  \boldmath
+}
+\makeatother
+
+% Para escribir elementos químicos
+%\usepackage{chemmacros}
+%\usepackage{bohr}
+%\newcommand*\mychemistry[2]{%
+%  \ch{^{#2}_{\atomicnumber{#1}}#1}}
+%\newcommand*\mychemistryg[3]{%
+%  \ch{^{#2}_{#3} #1}}
+%
+%\hyphenation{aproxi-ma-da-men-te}
+%\hyphenation{Chandrasekhar}
+%\hyphenation{Schwarzschild}
+
+\begin{document}
+	
+	\selectlanguage{spanish}
+
+    \renewcommand{\tablename}{Tabla}
+     \renewcommand{\refname}{Referencias}
+    \renewcommand{\figurename}{Figura}
+
+    \renewcommand{\thefootnote}{\Roman{footnote}}
+
+    \lefthyphenmin=2
+    \righthyphenmin=2
+
+    \frontmatter
+
+    \input{./1_titlepage}
+    \input{./2_dedicatoria}
+	%\input{./agradecimientos}
+	\input{./3_abstract}
+	
+    \pagestyle{empty}%fancy
+
+    \singlespacing
+    \tableofcontents
+	\onehalfspacing
+    %\listoffigures
+    %\listoftables
+
+    \mainmatter
+    \pagestyle{fancy}
+    \pagestyle{plain}
+    \input{./4_introduccion}
+    \input{./5_cap1}
+    \input{./6_cap2}
+    \input{./7_cap3}
+%    \input{./cap4}
+    \input{./8_conclusiones}
+
+	
+     %\input{./Pseudocodigo}
+%     \input{./Ajuste}
+     %Si hay más apéndices, solo los agregas
+     
+
+
+	\backmatter
+
+	\singlespacing
+	\bibliographystyle{ieeetr}  % or: plain,unsrt,alpha,abbrv,acm,apalike, ieeetr,..
+%    \bibliographystyle{phd_bib}	% definir el estilo de la bibliografía .bst (phd_bib,mibib)
+    \bibliography{bibl} 	% ejemplo. hacer uno genérico. Solo pone las que se citan.
+%    \bibliography{test}
+%    \nocite{*}
+
+%	\singlespacing
+%	\appendix
+%%	\section*{Apéndices}
+%	\addcontentsline{toc}{chapter}{Apéndices}
+%	\input{./microarray-example}
+%	\input{./tablas}
+
+\end{document}
