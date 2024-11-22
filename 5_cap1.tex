@@ -1,10 +1,14 @@
 % !TeX root = Tesis.tex
 % !TeX spellcheck = es_ES
 % !TeX encoding = UTF-8
-\chapter{Chapter 1}
+\chapter{Materiales y métodos}
 \label{cap1}
-\section{Section 1}
+\section{Análisis de Componentes Principales}
 \label{c11}
-
 \onehalfspacing
-\lipsum[3-5]
+
+Una de las primeras estrategias utilizadas en el análisis de grandes bases de datos es la reducción de la dimensionalidad. Esto permite obtener representaciones en solo 2 o 3 dimensiones y de esta forma comenzar a ganar claridad sobre el estudio que se desea realizar. Algunas de las técnicas comunes de reducción dimensional son PCA (\textit{Principal Component Analisis}), t-SNE (\textit{t-Distributed Stochastic Neighbor Embedding}), UMAP (\textit{Uniform Manifold Approximation and Projection}), entre otras.
+
+t-SNE es un método no linear y estocástico. Su funcionamiento se puede separar en dos etapas. En la primera, se seleccionan los vecinos de cada punto. Esto se hace utilizando una distribución gaussiana alrededor de cada punto, donde los más cercanos tienen un probabilidad mayor de ser seleccionados que los lejanos. Durante la segunda etapa se asignan posiciones iniciales aleatorias en un espacio de menor dimensión (generalmente 2 o 3 dimensiones). Luego, se define una distribución de probabilidad similar para los puntos en el nuevo espacio y se minimiza la divergencia entre las dos distribuciones. De esta forma el algoritmo logra obtiene una representación en un dimensión reducida que preserva la similaridad entre los vecinos cercanos.
+
+UMAP es una técnica muy similar a t-SNE. Una de las diferencias principales es que, durante la selección de los vecinos se asume que los datos forman una variedad de menor dimensión que los espacio original. Otra característica de este método es que, para hacer la representación reducida minimiza el entropia cruzada en lugar de la divergencia entre las distribuciones. Estas diferencias le permiten a este algoritmo preservar mejor tanto la estructura local como la global de los datos. 
