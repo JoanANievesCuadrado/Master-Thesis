@@ -9,7 +9,7 @@
 
 %La reducción de la dimensionalidad es un paso crucial en el análisis de datos, especialmente cuando se trata de grandes conjuntos de datos con muchas variables. Al reducir la dimensionalidad, se facilita la visualización y comprensión de los datos, lo que permite a los analistas y científicos de datos identificar patrones y tendencias importantes. El PCA es una técnica lineal que transforma las variables correlacionadas en un número menor de variables no correlacionadas llamadas componentes principales. Por otro lado, t-SNE y UMAP son técnicas no lineales que son particularmente útiles para preservar la estructura local de los datos en espacios de baja dimensión, lo que las hace ideales para la visualización de agrupaciones complejas y estructuras de datos de alta dimensión. Estas técnicas son herramientas poderosas que ayudan a simplificar la complejidad de los datos sin perder información crítica, lo que permite un análisis más eficiente y efectivo.
 
-La reducción de la dimensionalidad es un paso crucial en el análisis de datos, especialmente cuando se trata de grandes conjuntos con muchas variables. Esto facilita la visualización y comprensión de los datos, lo que permite una rápida identificación de patrones y tendencias importantes. Algunas técnicas comunes de reducción dimensional son PCA (\textit{Principal Component Analisis}), t-SNE (\textit{t-Distributed Stochastic Neighbor Embedding}) y UMAP (\textit{Uniform Manifold Approximation and Projection}). Estas técnicas son herramientas poderosas que ayudan a simplificar la complejidad de los datos sin perder información crítica, lo que permite un análisis más eficiente y efectivo.
+La reducción de la dimensionalidad es un paso crucial en el análisis de datos, especialmente cuando se trata de grandes conjuntos con muchas variables. Este facilita la visualización y comprensión de los datos, lo que permite una rápida identificación de patrones y tendencias importantes. Algunas técnicas comunes de reducción dimensional son PCA (\textit{Principal Component Analisis}), t-SNE (\textit{t-Distributed Stochastic Neighbor Embedding}) y UMAP (\textit{Uniform Manifold Approximation and Projection}). Estas técnicas son herramientas poderosas que ayudan a simplificar la complejidad de los datos sin perder información crítica, lo que permite un análisis más eficiente y efectivo.
 
 El t-SNE es un método no linear y estocástico. Su funcionamiento se puede separar en dos etapas. En la primera, se seleccionan los vecinos de cada punto. Para ello se utiliza una distribución gaussiana alrededor de él, donde los más cercanos tienen un probabilidad mayor de ser seleccionados que los lejanos. Este paso permite al modelo preservar las estructuras locales. Durante la segunda etapa, se asignan posiciones iniciales aleatorias en un espacio de menor dimensión (generalmente 2 o 3 dimensiones). Luego, se define una distribución de probabilidad similar para los puntos en el nuevo espacio y se minimiza la divergencia entre las dos distribuciones. Esta etapa ayuda a mantener la fidelidad de la representación en el espacio reducido. De esta forma, el algoritmo logra una transformación de los datos hacia una dimensión reducida que preserva la similitud entre los vecinos cercanos.
 
@@ -26,9 +26,9 @@ Otro problema grave que enfrenta el algoritmo estándar del PCA es el cálculo d
 
 Un algoritmo relativamente sencillo de implementar y que permite calcular solo los autovalores más grandes y  sus correspondientes autovectores es el método de Lanczos. En el caso del análisis de datos de expresión genética, donde solo un subconjunto diferente de genes se expresa en cada tejido, la matriz de covarianza podría tener un número elevado de valores nulos. Esto es beneficioso para el método de Lanczos, ya que funciona mejor con matrices dispersas.
 
-Este es un algoritmo que puede ser de gran utilidad en algunos problemas donde las implementaciones estándar pueden verse limitadas. Sin embargo, en la práctica se utilizan otras técnicas para realizar el PCA de forma indirecta. Una de estas es la descomposición en valores singulares (SVD, por sus siglas en inglés). Por estas razones, a continuación mostraremos brevemente la implementación básica del método de Lanczos. Luego, en qué consiste el SVD y cómo realizar el PCA a partir de este.
+El método de Lanczos puede ser de gran utilidad en algunos problemas donde las implementaciones estándar pueden verse limitadas. Sin embargo, en la práctica se utilizan otras técnicas para realizar el PCA de forma indirecta. Una de las alternativas es la descomposición en valores singulares (SVD, por sus siglas en inglés). Por estas razones, a continuación mostraremos brevemente la implementación básica del método de Lanczos. Luego, en qué consiste el SVD y cómo realizar el PCA de forma indirecta a partir de este.
 
-\subsection{Algoritmo de Lanczos}
+\subsection*{Algoritmo de Lanczos}
 
 El método de Lanczos es una técnica numérica utilizada para encontrar los autovalores y autovectores de una matriz grande y dispersa. Es especialmente útil en problemas de álgebra lineal donde la matriz es demasiado grande para ser manejada por métodos directos.
 
@@ -37,5 +37,19 @@ El método de Lanczos es una técnica numérica utilizada para encontrar los aut
 
 Una de las limitaciones de este algoritmo es su estabilidad numérica.
 
+\subsection*{Descomposición en valores singulares}
 
-%En la práctica, se utilizan técnicas como la descomposición en valores singulares (SVD) para trabajar con matrices de covarianza de manera más eficiente, reduciendo así la necesidad de almacenamiento y acelerando el acceso a la información. Además, existen algoritmos y enfoques de big data diseñados para manejar grandes volúmenes de datos que no caben en la memoria RAM y que optimizan el uso del disco duro para minimizar el impacto en el rendimiento.
+La SVD provee una descomposición numéricamente estable de matrices que puede ser usado en una gran variedad de propósitos. La SVD es una descomposición matricial única que existe para toda matriz de valores complejos $\mathbf{X} \in \mathbb{C}^{n \times m}$:
+
+\begin{equation}
+	\mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^*
+\end{equation}
+donde $\mathbf{U} \in \mathbb{C}^{n \times n}$ y $\mathbf{V} \in \mathbb{C}^{m \times m}$ son matrices unitarias con columnas ortonormales, y $\mathbf{\Sigma} \in \mathbb{R}^{n \times m}$ una matriz con valores reales no negativos en la diagonal y ceros fuera de la diagonal. Aquí $^*$ denota la transpuesta conjugada.
+
+Cuando $n \ge m$, la matriz $\mathbf{\Sigma}$ tiene como máximo $m$ valores distintos de cero en la diagonal, y puede ser escrita como $\mathbf{\Sigma} = \begin{bmatrix}\hat{\mathbf{\Sigma}} \\ 0\end{bmatrix}$. Por lo tanto, es posible representar $\mathbf{X}$ de forma exacta usando la versión reducida de SVD:
+
+\begin{equation}
+	\mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^* = \begin{bmatrix} 	\hat{\mathbf{U}} & \mathbf{U}^\perp \end{bmatrix} \begin{bmatrix} \hat{\mathbf{\Sigma}} \\ 0 \end{bmatrix} \mathbf{V}^*
+\end{equation}
+las columnas de $\mathbf{U}^\perp$ abarcan un espacio vectorial que es complementario y ortogonal a $\hat{\mathbf{U}}$. Las columnas de $\mathbf{U}$ son llamadas vectores singulares izquierdos de $\mathbf{X}$ y las columnas de $\mathbf{V}$ son los vectores singulares derechos. Los elementos diagonales de $\hat{\mathbf{\Sigma}} \in \mathbb{C}^{m \times m}$ son los llamados valores singulares están ordenados de mayor a menor. El rango de $\mathbf{X}$ es igual a la cantidad de valores singulares distintos de cero.
+
