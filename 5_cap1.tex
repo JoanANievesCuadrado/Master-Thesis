@@ -42,14 +42,41 @@ Una de las limitaciones de este algoritmo es su estabilidad numérica.
 La SVD provee una descomposición numéricamente estable de matrices que puede ser usado en una gran variedad de propósitos. La SVD es una descomposición matricial única que existe para toda matriz de valores complejos $\mathbf{X} \in \mathbb{C}^{n \times m}$:
 
 \begin{equation}
-	\mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^*
+	\mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^*,
 \end{equation}
 donde $\mathbf{U} \in \mathbb{C}^{n \times n}$ y $\mathbf{V} \in \mathbb{C}^{m \times m}$ son matrices unitarias con columnas ortonormales, y $\mathbf{\Sigma} \in \mathbb{R}^{n \times m}$ una matriz con valores reales no negativos en la diagonal y ceros fuera de la diagonal. Aquí $^*$ denota la transpuesta conjugada.
 
-Cuando $n \ge m$, la matriz $\mathbf{\Sigma}$ tiene como máximo $m$ valores distintos de cero en la diagonal, y puede ser escrita como $\mathbf{\Sigma} = \begin{bmatrix}\hat{\mathbf{\Sigma}} \\ 0\end{bmatrix}$. Por lo tanto, es posible representar $\mathbf{X}$ de forma exacta usando la versión reducida de SVD:
+Cuando $n \ge m$, la matriz $\mathbf{\Sigma}$ tiene como máximo $m$ valores distintos de cero en la diagonal y puede ser escrita como $\mathbf{\Sigma} = \begin{bmatrix}\hat{\mathbf{\Sigma}} \\ 0\end{bmatrix}$. Por lo tanto, es posible representar $\mathbf{X}$ de forma exacta usando la versión reducida de SVD:
 
 \begin{equation}
-	\mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^* = \begin{bmatrix} 	\hat{\mathbf{U}} & \mathbf{U}^\perp \end{bmatrix} \begin{bmatrix} \hat{\mathbf{\Sigma}} \\ 0 \end{bmatrix} \mathbf{V}^*
+	\mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^* = \begin{bmatrix} 	\hat{\mathbf{U}} & \mathbf{U}^\perp \end{bmatrix} \begin{bmatrix} \hat{\mathbf{\Sigma}} \\ 0 \end{bmatrix} \mathbf{V}^*,
 \end{equation}
-las columnas de $\mathbf{U}^\perp$ abarcan un espacio vectorial que es complementario y ortogonal a $\hat{\mathbf{U}}$. Las columnas de $\mathbf{U}$ son llamadas vectores singulares izquierdos de $\mathbf{X}$ y las columnas de $\mathbf{V}$ son los vectores singulares derechos. Los elementos diagonales de $\hat{\mathbf{\Sigma}} \in \mathbb{C}^{m \times m}$ son los llamados valores singulares están ordenados de mayor a menor. El rango de $\mathbf{X}$ es igual a la cantidad de valores singulares distintos de cero.
+las columnas de $\mathbf{U}^\perp$ abarcan un espacio vectorial que es complementario y ortogonal a $\hat{\mathbf{U}}$. Las columnas de $\mathbf{U}$ son llamadas vectores singulares izquierdos de $\mathbf{X}$ y forman una base del espacio de los vectores columnas de $\mathbf{X}$. Las columnas de $\mathbf{V}$ son los vectores singulares derechos y forman una base para los vectores filas de $\mathbf{X}$. Los elementos diagonales de $\hat{\mathbf{\Sigma}} \in \mathbb{C}^{m \times m}$ , los llamados valores singulares, están ordenados de mayor a menor. El rango de $\mathbf{X}$ es igual a la cantidad de valores singulares distintos de cero.
+
+Para ver la relación con el PCA, supongamos una matriz de datos $\mathbf{X} \in \mathbb{R}^{n \times m}$ que ha sido previamente centrada, es decir, la media de cada columna es cero. Su matriz de covarianza se calcula como:
+
+\begin{equation}
+	\mathbf{C} = \mathbf{X}^T  \mathbf{X}.
+\end{equation}
+
+Si usamos la SVD de $\mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T$ y la propiedad de ortonormalidad de $\mathbf{U}$ y $\mathbf{V}$, obtenemos:
+
+\begin{equation}
+	\mathbf{C} = \mathbf{V} \mathbf{\Sigma} \mathbf{U}^T \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T =  \mathbf{V} \mathbf{\Sigma}^2 \mathbf{V}^T,
+\end{equation}
+es decir, $\mathbf{\Sigma}$ y $\mathbf{V}$ son la solución del siguiente problema de autovalores:
+\begin{equation}
+	\mathbf{C} \mathbf{V} = \mathbf{V} \mathbf{\Sigma}^2.
+\end{equation}
+
+En otras palabras, cada valor singular distinto de cero de $\mathbf{X}$ es la raíz cuadrada positiva de los autovalores de su matriz de covarianza, y las columnas de $\mathbf{V}$ son los autovectores. En términos del PCA, las columnas de $\mathbf{V}$ son las componentes principales de $\mathbf{X}$ y los elementos de la diagonal de $\mathbf{\Sigma}^2$ representan la varianza de los datos en cada una de las componente.
+
+Esta es la manera usual en la que los algoritmo actuales hacen el PCA, por ejemplo, la librería scikit-learn de Python \cite{scikit-learn}. En general, nosotros preferimos usar directamente SVD para hacer el PCA, ya que brinda mayor flexibilidad y control. Por ejemplo, si en lugar usar una matriz de media cero, los datos se centran en el valor medio de un subconjunto, las componentes principales van a indicar la dirección en la cual hay más \alert{(peso, dispersión???)}
+
+
+
+
+
+
+
 
