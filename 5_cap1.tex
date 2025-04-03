@@ -1,5 +1,5 @@
 % !TeX root = Tesis.tex
-% !TeX spellcheck = es_ES
+% !TeX spellcheck = es
 % !TeX encoding = UTF-8
 \chapter{Materiales y métodos}
 \label{cap1}
@@ -73,7 +73,7 @@ En otras palabras, cada valor singular distinto de cero de $\mathbf{X}$ es la ra
 
 Esta es la manera usual en la que los algoritmo actuales realizan el PCA, por ejemplo, la librería scikit-learn de Python \cite{scikit-learn}. En general, nosotros preferimos usar directamente SVD para hacer el PCA, ya que brinda mayor flexibilidad y control. Por ejemplo, si en lugar usar una matriz de media cero, los datos se centran en el valor medio de un subconjunto, las componentes principales van a indicar la dirección en la cual hay más dispersión respecto a este subjconjunto.
 
-Una ventaja significativa de este método para realizar el PCA, es que se obtiene las componentes principales directamente, sin tener que calcular la matriz de covarianza. Esto permite ahorrar tiempo y recursos computacionales, algo que toma mayor importancia en la medida que aumenta la cantidad de datos y el números de variables a procesar.
+Una ventaja significativa de este método para realizar el PCA, es que se obtiene las componentes principales directamente, sin tener que calcular la matriz de covarianza. Esto permite ahorrar tiempo y recursos computacionales, algo que toma mayor importancia en la medida que aumenta la cantidad de datos y el números de variables a procesar. Un procedimiento similar se siguió en las referencias \cite{Gonzalez_2023, Gonzalez_2021}.
 
 
 

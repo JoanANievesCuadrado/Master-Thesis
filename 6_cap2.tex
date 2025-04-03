@@ -1,12 +1,12 @@
 % !TeX root = Tesis.tex
 % !TeX encoding = UTF-8
-% !TeX spellcheck = es_ES
-\chapter{Chapter 2}
+% !TeX spellcheck = es
+\chapter{Diagrama de tres atractores}
 \label{cap3}
 \onehalfspacing
 
 
-\section{The N + GB + EA diagram}\label{sec:ngbad}
+\section{El diagrama de N + GB + EA}\label{sec:ngbad}
 
 Nuestro punto de partida es el diagrama de los datos de expresión genética del análisis de componentes principales para la materia blanca del cerebro, mostrado en la Fig. \ref{fig:fig1a}. Como se puede notar en la figura, las dos primeras componentes principales capturan más del 80 \% de la varianza del sistema. Por lo tanto, es una representación bidimensional adecuada de la distribución real de los puntos en el espacio de expresión genética.
 
@@ -58,3 +58,38 @@ Una mejor ilustración de este hecho viene representada en la Fig. \ref{fig:supp
 \end{figure}
 
 Esta propiedad sugiere que el centro de la nube de muestras de la EA define un atractor en el espacio de expresión genética. Las muestras de O parecen ser atrapadas por el atractor de la EA en el proceso del envejecimiento.
+
+Así, en nuestra aproximación, obtenemos un panorama en el espacio de expresión genética de tres atractores: N, GB y EA, y un conjunto de muestras de O que se desplaza hacia la EA. Las posiciones relativas y las principales transiciones entre los atractores se resumen en la Fig. \ref{fig:fig1b}. Asumimos que estas transiciones están determinadas por la biología subyacente a los procesos en los tejidos. La transición de N a la EA se denomina ``EA anticipada'' para enfatizar que también existe una vía hacia la EA a través del envejecimiento: ``EA tardía''. La figura también indica una vía para el GB y para el envejecimiento.
+
+\begin{figure}[!htb]
+	%TODO: arreglar los labels
+	\centering
+	\includegraphics[width=0.75\linewidth]{figures/Fig_1b.pdf}
+	\caption{Posiciones relativas y principales transiciones entre los atractores.}
+	\label{fig:fig1b}
+\end{figure}
+
+\section{Panorama del \emph{fitness}}
+
+Existe información cualitativa que puede introducirse en nuestra descripción. Esta se relaciona con una variable de \emph{fitness}, de modo que dibujamos una especie de diagrama de Wright \cite{wright1932roles}. En la Fig. \ref{fig:fig1c} se muestra un diagrama esquemático que contiene un gráfico de contorno hipotético del \emph{fitness}. Los atractores N y GB son máximos de \emph{fitness} y deberían estar separados por una barrera de bajo \emph{fitness} \cite{Gonzalez_2021}. El GB debería ser el máximo más alto de los tres actores representados \cite{Gonzalez_2021, gonzalez2022estimating}. Por otro lado, la transición de O a la EA es casi continua, con un número relativamente pequeño de genes expresados diferencialmente \cite{Gonzalez_2021}. Esto significa que existe una barrera muy pequeña, o incluso una ruta sin barrera, que conecta a O y a la EA. Esperamos una barrera de bajo \emph{fitness} que impida las transiciones directas de O a la EA, y un máximo de la EA pequeño, ya que este atractor se encuentra en la región de bajo \emph{fitness}, lejos de N. 
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.75\linewidth]{figures/Fig_1c.pdf}
+	\caption{Diagrama de Wright que muestra un gráfico de contorno hipotético del \emph{fitness}. El máximo absoluto corresponde con el estado de GB. El atractor de la EA se representa como un ligero máximo local.}
+	\label{fig:fig1c}
+\end{figure}
+
+Todos estos hechos se representan en la Fig. \ref{fig:fig1c}. El esquema se construye a partir de una suma de gaussianas centradas en los atractores, con desviaciones estándar proporcionales a los valores reales observados en la Fig. \ref{fig:fig1a} y con alturas que respetan cualitativamente la fuerza relativa de los atractores.
+
+
+
+\section{Limitaciones}
+
+En este trabajo se utilizaron datos de expresión genética, en formato FPKM, de las referencias \cite{Brennan_2013, Miller_2017}. Estos fueron obtenidos usando diferentes plataformas. Nosotros tomamos aproximadamente 30 000 genes que están perfectamente identificados en ambas plataformas y realizamos un sencillo análisis de componentes principales \cite{Lever2017}, como se definió en la sección \ref{subsec:svd}. Para definir los valores de la expresión diferencial logarítmica y calcular la matriz de covarianza utilizada para el PCA, se utilizó como referencia común la media geométrica en el conjunto de muestras N.
+
+Debido al uso de estos datos, proveniente de dos experimentos distintos, para realizar un solo calculo de PCA surgen problemas tanto técnicos como conceptuales. Por ejemplo, la referencia N corresponde precisamente al estado normal del cerebro, sino que son un conjunto de muestras patológicamente normales que fueron tomadas de individuos con GB. Además, dos de los pacientes tienen más de 70 años. Desde el punto de vista computacional, por otro lado, se podrían utilizar correcciones por lotes\cite{haghverdi2018batch, zhang2020combat}, que corrigen parcialmente los sesgos asociados a cada grupo de muestras, pero también pueden introducir problemas incontrolados.
+
+En lugar de introducir procedimientos muy avanzados, preferimos extraer los datos directamente de las fuentes y utilizar la técnica de PCA más sencilla. No creemos que ninguna corrección altere sustancialmente el análisis cualitativo derivado del diagrama de tres atractores que se muestras en la Fig. \ref{fig:fig1a}.
+
+La situación ideal podría ser repetir el experimento dentro de un único marco tecnológico, incluyendo datos de personas jóvenes sanas, que se utilizarían para establecer la referencia de los cálculos de la expresión genética diferencial, incluyendo datos de pacientes con GB y la EA, y datos de pacientes sanos en diferentes rangos de edad. Este es un experimento complejo, pero podría ser particularmente factible en un modelo de ratones \cite{hahn2023atlas}, por ejemplo. Consideramos nuestro diagrama de la Fig. \ref{fig:fig1a} como una aproximación cualitativa de este experimento ideal.
