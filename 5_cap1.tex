@@ -53,7 +53,23 @@ Cuando $n \ge m$, la matriz $\mathbf{\Sigma}$ tiene como máximo $m$ valores dis
 \end{equation}
 las columnas de $\mathbf{U}^\perp$ abarcan un espacio vectorial que es complementario y ortogonal a $\hat{\mathbf{U}}$. Las columnas de $\mathbf{U}$ son llamadas vectores singulares izquierdos de $\mathbf{X}$ y forman una base del espacio de los vectores columnas de $\mathbf{X}$. Las columnas de $\mathbf{V}$ son los vectores singulares derechos y forman una base para los vectores filas de $\mathbf{X}$. Los elementos diagonales de $\hat{\mathbf{\Sigma}} \in \mathbb{C}^{m \times m}$ , los llamados valores singulares, están ordenados de mayor a menor. El rango de $\mathbf{X}$ es igual a la cantidad de valores singulares distintos de cero.
 
-Para ver la relación con el PCA, supongamos una matriz de datos $\mathbf{X} \in \mathbb{R}^{n \times m}$ que ha sido previamente centrada, es decir, la media de cada columna es cero. La matriz de covarianza se calcula como:
+Para ver la relación de esta técnica con el PCA, partimos de la matriz de covarianza. Esta se construye a partir de la siguiente expresión:
+
+\begin{equation}
+	\sigma_{ij} = \frac{1}{N - 1}\displaystyle{\sum_{l=1}^{N} \left( x_i^{(l)} - \mu_i \right) \left( x_j^{(l)} - \mu_j \right)},
+	\label{eq:covmat1}
+\end{equation}
+
+donde $i$ y $j$ son la característica $i$-ésima y $j$-ésima del conjunto de datos estudiado, en nuestro caso son el gen $i$ y $j$, respectivamente. La variable $l$ se recorre por todas las muestras. $\sigma_{ij}$ es el elemento $(i,\ j)$ de la matriz de covarianza, es decir, es la covarianza entre el gen $i$ y el $j$ para los elementos no diagonales y la varianza del gen $i$ para los elementos de la diagonal principal. El número total de muestras es $N$, $x_i^{(l)} \in \mathbb{R}$ es el valor de la componente $i$ en la muestra $l$, y, por último, $\mu_i$ es la media de los valores de la componente $i$ sobre todas las muestras.
+
+Si los datos ya han sido previamente centrados, es decir, se cumple que $\mu_i = 0$ para todo $i$, entonces la ecuación \eqref{eq:covmat1} puede reducirse a:
+
+\begin{equation}
+	\sigma_{ij} = \frac{1}{N - 1} \displaystyle{ \sum_{l=1}^{N} x_i^{(l)} x_j^{(l)} },
+	\label{eq:covmat2}
+\end{equation}
+
+Si definimos una matriz $\mathbf{X} \in \mathbb{R}^{n \times m}$, tal que el elemento $(i,\ j)$ es igual a $x_i^{(j)}/(N-1)$, la ecuación \eqref{eq:covmat2} queda representada en forma matricial como:
 
 \begin{equation}
 	\mathbf{C} = \mathbf{X}^T  \mathbf{X}.
@@ -61,24 +77,35 @@ Para ver la relación con el PCA, supongamos una matriz de datos $\mathbf{X} \in
 
 Si usamos la SVD de $\mathbf{X} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T$ y la propiedad de ortonormalidad de $\mathbf{U}$ y $\mathbf{V}$, obtenemos:
 
-\begin{equation}
-	\mathbf{C} = \mathbf{V} \mathbf{\Sigma} \mathbf{U}^T \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T =  \mathbf{V} \mathbf{\Sigma}^2 \mathbf{V}^T,
-\end{equation}
+\begin{eqnarray}
+	\mathbf{C} =& \mathbf{V} \mathbf{\Sigma} \mathbf{U}^T \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T, \\
+	=& \mathbf{V} \mathbf{\Sigma}^2 \mathbf{V}^T,
+\end{eqnarray}
 es decir, $\mathbf{\Sigma}$ y $\mathbf{V}$ son la solución del siguiente problema de autovalores:
 \begin{equation}
 	\mathbf{C} \mathbf{V} = \mathbf{V} \mathbf{\Sigma}^2.
 \end{equation}
 
-En otras palabras, cada valor singular distinto de cero de $\mathbf{X}$ es la raíz cuadrada positiva de los autovalores de su matriz de covarianza, y las columnas de $\mathbf{V}$ son los autovectores. En términos del PCA, las columnas de $\mathbf{V}$ son las componentes principales de $\mathbf{X}$ y los elementos de la diagonal de $\mathbf{\Sigma}^2$ representan la varianza de los datos en cada una de las componente.
+En otras palabras, cada valor singular de $\mathbf{X}$ distinto de cero es la raíz cuadrada positiva de los autovalores de su matriz de covarianza, y las columnas de $\mathbf{V}$ son los autovectores. En términos del PCA, las columnas de $\mathbf{V}$ son las componentes principales de $\mathbf{X}$ y los elementos de la diagonal de $\mathbf{\Sigma}^2$ representan la varianza de los datos en cada una de las componente.
 
-Esta es la manera usual en la que los algoritmo actuales realizan el PCA, por ejemplo, la librería scikit-learn de Python \cite{scikit-learn}. En general, nosotros preferimos usar directamente SVD para hacer el PCA, ya que brinda mayor flexibilidad y control. Por ejemplo, si en lugar usar una matriz de media cero, los datos se centran en el valor medio de un subconjunto, las componentes principales van a indicar la dirección en la cual hay más dispersión respecto a este subjconjunto.
+Esta es la manera usual en la que los algoritmo actuales realizan el PCA, por ejemplo, la librería \emph{scikit-learn} de Python \cite{scikit-learn}. En general, nosotros preferimos usar directamente SVD para hacer el PCA, ya que brinda mayor flexibilidad y control. Por ejemplo, si en lugar usar una matriz de media cero, los datos se centran en el valor medio de un subconjunto, las componentes principales van a indicar la dirección en la cual hay más dispersión respecto a este subjconjunto.
 
 Una ventaja significativa de este método para realizar el PCA, es que se obtiene las componentes principales directamente, sin tener que calcular la matriz de covarianza. Esto permite ahorrar tiempo y recursos computacionales, algo que toma mayor importancia en la medida que aumenta la cantidad de datos y el números de variables a procesar. Un procedimiento similar se siguió en las referencias \cite{Gonzalez_2023, Gonzalez_2021}.
 
+\section{Datos de expresión genética}
+Utilizamos datos de expresión genética obtenidos de dos experimentos distintos. El primero de ellos contiene muestras patológicamente normales (o ``sanas'') y con glioblastoma, y fueron tomadas del Atlas del Genoma del Cáncer (TCGA, \href{https://www.cancer.gov/tcga}{https://www.cancer.gov/tcga}) \cite{Brennan_2013, Tomczak2015}. Estas son tomadas durante procedimientos quirúrgicos. Los tumores se pueden localizar en diferente zonas cerebrales pero, como es común en el Glioblastoma, estos son tumores tomados de la sustancia blanca del cerebro \cite{ellingson2013probabilistic}.
 
+Hay 5 muestras normales de pacientes con edades en el rango entre 49 y 74 años, mientras que el intervalo de edades de las 169 muestras de glioblastoma es entre 21 y 89 años. Las pacientes femeninas representan aproximadamente dos tercios de la cohorte.
 
+El segundo grupo de datos proviene del estudio longitudinal del Instituto Allen sobre el envejecimiento y la demencia (\href{https://aging.brain-map.org/}{https://aging.brain-map.org/}) \cite{Miller_2017}. Las muestras son tomadas \textit{post mortem}. El grupo de control está conformado por 47 muestras, mientras que en el otro hay 28 muestras. El intervalo de edad para todas estas muestras es entre 77 y 101 años. El diagnóstico de la enfermedad del Alzheimer está respaldado por pruebas cognitivas y otras pruebas clínicas. Alrededor del 40 \% de la cohorte son mujeres.
 
+En ambos experimentos los valores de expresión genética se encuentran en unidades FPKM (\textit{fragments per kilobase of transcript per million fragments mapped}), que es una unidad común en este tipo de estudios. En términos simples, dicha unidad de medida significa: la tasa de fragmentos por base multiplicada por un número muy grande ($ 10^9 $). El cálculo de FPKM para el gen $ i $ se realiza por medio de la siguiente fórmula \cite{Zhao_2021}:
 
-
-
+\begin{equation}
+	\begin{split}
+		FPKM_i &= \frac{q_i}{(l_i/10^3) (\sum_{j}q_j/10^6)} ,\\
+		&= \frac{q_i}{l_i \sum_j q_j} * 10^9,
+	\end{split}
+\end{equation}
+donde $ q_i $ es la cantidad de fragmentos contados, $ l_i $ es la longitud del gen, y $ \sum_j q_j $ corresponde al número total de fragmentos.
 

@@ -2,7 +2,7 @@
 % !TeX encoding = UTF-8
 % !TeX spellcheck = es
 \chapter{Diagrama de tres atractores}
-\label{cap3}
+\label{cap2}
 \onehalfspacing
 
 
@@ -10,19 +10,17 @@
 
 Nuestro punto de partida es el diagrama de los datos de expresión genética del análisis de componentes principales para la materia blanca del cerebro, mostrado en la Fig. \ref{fig:fig1a}. Como se puede notar en la figura, las dos primeras componentes principales capturan más del 80 \% de la varianza del sistema. Por lo tanto, es una representación bidimensional adecuada de la distribución real de los puntos en el espacio de expresión genética.
 
-\begin{figure}[!ht]
+\begin{figure}[!htb]
 	%TODO: rehacer la figura para cambiar el label AD por EA
 	\centering
-	\includegraphics{figures/Fig_1a.pdf}
+	\includegraphics[width=0.75\linewidth]{figures/Fig_1a.pdf}
 	\caption{\label{fig:fig1a}
 		Análisis de componentes principales para los datos de expresión genética.}
 \end{figure}
 
-En la figura se pueden apreciar 4 grupos de muestras. Las muestras marcadas como N y GB corresponden, a especímenes patológicamente normales y tumorales en los datos del Atlas del Genoma del Cáncer (TCGA, \href{https://www.cancer.gov/tcga}{https://www.cancer.gov/tcga}) para el Glioblastoma \cite{Brennan_2013}. Estas son tomadas durante procedimientos quirúrgicos. Los tumores se pueden localizar en diferente zonas cerebrales pero, como es común en el Glioblastoma, estos son tumores tomados de la sustancia blanca del cerebro \cite{ellingson2013probabilistic}. Los centros de las nubes de muestras de N y GB en el espacio de expresión genética definen, respectivamente, los atractores Normal (homeostático) y Glioblastoma de Kauffman \cite{Huang_2009, Gonzalez_2023}. De hecho, la acumulación de puntos en una determinada región de este espacio indica que esta es un atractor de la Red de regulación Genética que gobierna la dinámica del sistema.
+En la figura se pueden apreciar 4 grupos de muestras. Las muestras marcadas como N y GB corresponden, a especímenes patológicamente normales y tumorales en los datos del TCGA para el Glioblastoma \cite{Brennan_2013}. Los centros de las nubes de muestras de N y GB en el espacio de expresión genética definen, respectivamente, los atractores Normal (homeostático) y Glioblastoma de Kauffman \cite{Huang_2009, Gonzalez_2023}. De hecho, la acumulación de puntos en una determinada región de este espacio indica que esta es un atractor de la red de regulación Genética que gobierna la dinámica del sistema.
 
-Hay 5 muestras N de pacientes con edades en el rango entre 49 y 74 años, mientras que el intervalo de edades de las 169 muestras de GB es entre 21 y 89 años. Las pacientes femeninas representan aproximadamente dos tercios de la cohorte.
-
-Por otro lado, los grupos etiquetados como EA y O corresponden a las muestras de la materia blanca del cerebro de la enfermedad del Alzheimer y del grupo de control (\textit{old}) en el estudio longitudinal del Instituto Allen sobre envejecimiento y la demencia (\href{https://aging.brain-map.org/}{https://aging.brain-map.org/}) \cite{Miller_2017}. Las muestras son tomadas \textit{post mortem}. El grupo O está conformado por 47 muestras, mientras que en el grupo EA hay 28. El intervalo de edad para todas estas muestras es entre 77 y 101 años. El diagnóstico de la EA está respaldado por pruebas cognitivas y otras pruebas clínicas. Alrededor del 40 \% de la cohorte son mujeres.
+Por otro lado, los grupos etiquetados como EA y O corresponden a las muestras de la materia blanca del cerebro de la enfermedad del Alzheimer y del grupo de control (\textit{old}) en el estudio del Instituto Allen \cite{Miller_2017}. 
 
 La Fig. \ref{fig:pcaotoad} es una reconstrucción de la figura 3 de la referencia \cite{Gonzalez_2021}. En esta se muestra los resultados del PCA para los datos de expresión genética de la materia blanca del cerebro del Instituto Allen. La primera componente principal (PC1), la cual contiene el $24.7 \%$ de la varianza total, discrimina entre las muestra de O y EA. La posición del centro de la nube de O en este eje es $\left\langle x_1 \right\rangle  = 0 $, y para la EA es $\left\langle x_1 \right\rangle = 40.97 $. Sin embargo, los radios de las nubes de las muestras de O y EA son más grandes que la distancia entre los centros, que son $80.69$ y $72.64$ respectivamente.
 %\alert{Estudiamos la transición de O hacia EA en la referencia \cite{Gonzalez_2021}}. En la Fig. \ref{fig:otoad}
@@ -69,7 +67,7 @@ Así, en nuestra aproximación, obtenemos un panorama en el espacio de expresió
 	\label{fig:fig1b}
 \end{figure}
 
-\section{Panorama del \emph{fitness}}
+\section{Panorama del \emph{fitness}}\label{sec:sec22}
 
 Existe información cualitativa que puede introducirse en nuestra descripción. Esta se relaciona con una variable de \emph{fitness}, de modo que dibujamos una especie de diagrama de Wright \cite{wright1932roles}. En la Fig. \ref{fig:fig1c} se muestra un diagrama esquemático que contiene un gráfico de contorno hipotético del \emph{fitness}. Los atractores N y GB son máximos de \emph{fitness} y deberían estar separados por una barrera de bajo \emph{fitness} \cite{Gonzalez_2021}. El GB debería ser el máximo más alto de los tres actores representados \cite{Gonzalez_2021, gonzalez2022estimating}. Por otro lado, la transición de O a la EA es casi continua, con un número relativamente pequeño de genes expresados diferencialmente \cite{Gonzalez_2021}. Esto significa que existe una barrera muy pequeña, o incluso una ruta sin barrera, que conecta a O y a la EA. Esperamos una barrera de bajo \emph{fitness} que impida las transiciones directas de O a la EA, y un máximo de la EA pequeño, ya que este atractor se encuentra en la región de bajo \emph{fitness}, lejos de N. 
 
@@ -82,9 +80,10 @@ Existe información cualitativa que puede introducirse en nuestra descripción. 
 
 Todos estos hechos se representan en la Fig. \ref{fig:fig1c}. El esquema se construye a partir de una suma de gaussianas centradas en los atractores, con desviaciones estándar proporcionales a los valores reales observados en la Fig. \ref{fig:fig1a} y con alturas que respetan cualitativamente la fuerza relativa de los atractores.
 
+Resaltemos el significado de un diagrama de Wright en el tejido cerebral. En otros tejidos, la evolución somática se relaciona principalmente con la replicación de células madre. Sin embargo, en su estado normal, el cerebro es un tejido de replicación muy lenta \cite{spalding2005retrospective}. Los cambios en pequeñas regiones cerebrales, es decir, los desplazamientos en el diagrama, son básicamente daños acumulados, es decir, envejecimiento \cite{schumacher2021central}. Sin embargo, una vez que se produce la transición al estado GB, se produce un enorme aumento de la tasa de replicación de las células tumorales. Observemos, además, que los cambios relacionados con el envejecimiento son muy evidentes en la sustancia blanca \cite{guttmann1998white}.
 
 
-\section{Limitaciones}
+\section{Limitaciones}\label{sec:limitations}
 
 En este trabajo se utilizaron datos de expresión genética, en formato FPKM, de las referencias \cite{Brennan_2013, Miller_2017}. Estos fueron obtenidos usando diferentes plataformas. Nosotros tomamos aproximadamente 30 000 genes que están perfectamente identificados en ambas plataformas y realizamos un sencillo análisis de componentes principales \cite{Lever2017}, como se definió en la sección \ref{subsec:svd}. Para definir los valores de la expresión diferencial logarítmica y calcular la matriz de covarianza utilizada para el PCA, se utilizó como referencia común la media geométrica en el conjunto de muestras N.
 
