@@ -140,20 +140,26 @@
      
 
 
+
+
+	\singlespacing
+	\appendix
+%	\section*{Apéndices}
+	\addcontentsline{toc}{chapter}{Apéndices}
+	\input{./9_apendix1}
+	\input{./10_apendix2}
+	\input{./11_apendix3}
+	\input{./12_apendix4}
+	\input{./13_apendix5}
+	\input{./14_apendix6}
+
 	\backmatter
 
 	\singlespacing
 	\bibliographystyle{ieeetr}  % or: plain,unsrt,alpha,abbrv,acm,apalike, ieeetr,..
-%    \bibliographystyle{phd_bib}	% definir el estilo de la bibliografía .bst (phd_bib,mibib)
-    \bibliography{bibl} 	% ejemplo. hacer uno genérico. Solo pone las que se citan.
-%    \bibliography{test}
-%    \nocite{*}
-
-%	\singlespacing
-%	\appendix
-%%	\section*{Apéndices}
-%	\addcontentsline{toc}{chapter}{Apéndices}
-%	\input{./microarray-example}
-%	\input{./tablas}
+	%    \bibliographystyle{phd_bib}	% definir el estilo de la bibliografía .bst (phd_bib,mibib)
+	\bibliography{bibl} 	% ejemplo. hacer uno genérico. Solo pone las que se citan.
+	%    \bibliography{test}
+	%    \nocite{*}
 
 \end{document}
