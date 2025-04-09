@@ -11,7 +11,6 @@
 Nuestro punto de partida es el diagrama de los datos de expresión genética del análisis de componentes principales para la materia blanca del cerebro, mostrado en la Fig. \ref{fig:fig1a}. Como se puede notar en la figura, las dos primeras componentes principales capturan más del 80 \% de la varianza del sistema. Por lo tanto, es una representación bidimensional adecuada de la distribución real de los puntos en el espacio de expresión genética.
 
 \begin{figure}[!htb]
-	%TODO: rehacer la figura para cambiar el label AD por EA
 	\centering
 	\includegraphics[width=0.75\linewidth]{figures/Fig_1a.pdf}
 	\caption{\label{fig:fig1a}
@@ -26,21 +25,20 @@ La Fig. \ref{fig:pcaotoad} es una reconstrucción de la figura 3 de la referenci
 %\alert{Estudiamos la transición de O hacia EA en la referencia \cite{Gonzalez_2021}}. En la Fig. \ref{fig:otoad}
 
 \begin{figure}[!htb]
-	%TODO: replot this figure
-	%TODO: cambiar el label ND por O y AD por EA
+	%TODO:
 	\centering
-	\includegraphics[width=0.75\linewidth]{figures/pca_o_to_ad_1.png}
-	\caption{Figura tomada de la referencia \cite{Gonzalez_2021}.}
+	\includegraphics[width=0.75\linewidth]{figures/pca_o_to_ad_1}
+	\caption{\alert{Añadir caption}. Figura tomada de la referencia \cite{Gonzalez_2021}.}
 	\label{fig:pcaotoad}
 \end{figure}
 
-Es bien conocido el papel de la edad en la EA, especialmente en ancianos \cite{alz2019}. Por lo tanto, podemos usar la edad como una variable de tiempo para seguir la transición. A pesar del número relativamente pequeño de muestras, se realizó un análisis de regresión lineal de la posición media de $\left\langle x_1 \right\rangle$ en función de la edad en las muestras de O, Fig. \ref{fig:otoad}a, muestra que $\left\langle x_1 \right\rangle = -287.12 + 3.24 \cdot edad$. En las muestras de la EA, sin embargo, no se encontró correlación entre $\left\langle x_1 \right\rangle$ y la edad observada. Por lo tanto, la posición de la zona EA es aproximadamente fija, y la nube de muestras de O muestra una deriva hacia el mínimo de EA a medida que aumenta la edad.
+Es bien conocido el papel de la edad en la EA, especialmente en ancianos \cite{alz2019}. Por lo tanto, podemos usar la edad como una variable de tiempo para seguir la transición. A pesar del número relativamente pequeño de muestras, se realizó un análisis de regresión lineal de la posición media de $\left\langle x_1 \right\rangle$ en función de la edad en las muestras de O, Fig. \ref{fig:otoad}, muestra que $\left\langle x_1 \right\rangle = -287.12 + 3.24 \cdot edad$. En las muestras de la EA, sin embargo, no se encontró correlación entre $\left\langle x_1 \right\rangle$ y la edad observada. Por lo tanto, la posición de la zona EA es aproximadamente fija, y la nube de muestras de O muestra una deriva hacia el mínimo de EA a medida que aumenta la edad.
 
 \begin{figure}[!htb]
-	%TODO: replot this figure
+	%TODO
 	\centering
-	\includegraphics[width=0.7\linewidth]{figures/O_to_AD_1.png}
-	\caption{Figura tomada de la referencia \cite{Gonzalez_2021}}
+	\includegraphics[width=0.75\linewidth]{figures/O_to_AD_1}
+	\caption{\alert{Añadir caption}. Figura tomada de la referencia \cite{Gonzalez_2021}}
 	\label{fig:otoad}
 \end{figure}
 
@@ -60,7 +58,6 @@ Esta propiedad sugiere que el centro de la nube de muestras de la EA define un a
 Así, en nuestra aproximación, obtenemos un panorama en el espacio de expresión genética de tres atractores: N, GB y EA, y un conjunto de muestras de O que se desplaza hacia la EA. Las posiciones relativas y las principales transiciones entre los atractores se resumen en la Fig. \ref{fig:fig1b}. Asumimos que estas transiciones están determinadas por la biología subyacente a los procesos en los tejidos. La transición de N a la EA se denomina ``EA anticipada'' para enfatizar que también existe una vía hacia la EA a través del envejecimiento: ``EA tardía''. La figura también indica una vía para el GB y para el envejecimiento.
 
 \begin{figure}[!htb]
-	%TODO: arreglar los labels
 	\centering
 	\includegraphics[width=0.75\linewidth]{figures/Fig_1b.pdf}
 	\caption{Posiciones relativas y principales transiciones entre los atractores.}
