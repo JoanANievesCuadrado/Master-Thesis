@@ -75,14 +75,25 @@ def fig_2_2(old, alz):
     alpha_value = 0.7
 
     k = old.shape[0]
-    data = np.log2(np.concatenate([old, alz]))
+    old += 0.1
+    alz += 0.1
+    ref = gmean(old)
+    data = np.log2(np.concatenate([old, alz])/ref)
 
-    pca = PCA(n_components=2)
-    pcs = pca.fit_transform(data)
-    var = pca.explained_variance_ratio_
+    # pca = PCA(n_components=2)
+    # pcs = pca.fit_transform(data)
+    # var = pca.explained_variance_ratio_
+    U, s, Vt = np.linalg.svd(data, full_matrices=False)
+    eigenvalues: np.ndarray = s**2/data.shape[0]
+    var: np.ndarray = eigenvalues / eigenvalues.sum()
+    eigenvectors: np.ndarray= Vt
+    projection: np.ndarray = np.dot(Vt, data.T)
 
-    old_pcs = pcs[:k]
-    alz_pcs = pcs[k:]
+    old_pcs = projection[:2,:k].T
+    alz_pcs = projection[:2,k:].T
+
+    # old_pcs = pcs[:k]
+    # alz_pcs = pcs[k:]
 
     old_mean_x, old_mean_y = old_pcs.mean(axis=0)
     old_std_x, old_std_y = old_pcs.std(axis=0)
@@ -90,11 +101,11 @@ def fig_2_2(old, alz):
     alz_std_x, alz_std_y = alz_pcs.std(axis=0)
 
     l = 3
-    old_ell = Ellipse((old_mean_x, old_mean_y),
+    old_ell = Ellipse((old_mean_x, -old_mean_y),
                       width=l*old_std_x, height=l*old_std_y,
                       edgecolor=old_color, facecolor='none',
                       linewidth=1.5, linestyle='--')
-    alz_ell = Ellipse((alz_mean_x, alz_mean_y),
+    alz_ell = Ellipse((alz_mean_x, -alz_mean_y),
                       width=l*alz_std_x, height=l*alz_std_y,
                       edgecolor=alz_color, facecolor='none',
                       linewidth=1.5, linestyle='--')
@@ -103,9 +114,9 @@ def fig_2_2(old, alz):
     h=3.5
     w=h*gr
     fig, ax = plt.subplots(figsize=(w, h))
-    ax.scatter(pcs[:k,0], pcs[:k,1], label='O',
+    ax.scatter(old_pcs[:, 0], -old_pcs[:, 1], label='O',
                c=old_color, s=marker_size, alpha=alpha_value, marker='s')
-    ax.scatter(pcs[k:,0], pcs[k:,1], label='EA',
+    ax.scatter(alz_pcs[:, 0], -alz_pcs[:, 1], label='EA',
                c=alz_color, s=marker_size, alpha=alpha_value)
     ax.add_patch(old_ell)
     ax.add_patch(alz_ell)
@@ -137,15 +148,19 @@ def _set_old(pcs, age):
     for i, j in zip(age, pcs):
         x = int(i if i.isdecimal() else i.replace('+', '-').split('-')[0])
         if x < 84:
-            p1x.append(81.5)
+            # p1x.append(x)
+            p1x.append(82)
             p1y.append(j[0])
         elif x < 90:
-            p2x.append(x)
+            # p2x.append(x)
+            p2x.append(87)
             p2y.append(j[0])
         elif x < 95:
-            p3x.append(92.5)
+            # p3x.append(x)
+            p3x.append(92)
             p3y.append(j[0])
         else:
+            # p4x.append(x)
             p4x.append(96)
             p4y.append(j[0])
 
@@ -208,7 +223,7 @@ def fig_2_3(old_pcs, alz_pcs, old_age, alz_age):
                c=old_color, s=marker_size, alpha=alpha_value, marker='s')
     ax.scatter(x_alz, y_alz, label='EA',
                c=alz_color, s=marker_size, alpha=alpha_value)
-    ax.axhline(y=19.35, color=alz_color, linestyle='--')
+    ax.axhline(y=27.38, color=alz_color, linestyle='--')
     xlim = ax.get_xlim()
     ylim = ax.get_ylim()
     plt.plot(x1, y1, '--', c=old_color)
@@ -218,8 +233,8 @@ def fig_2_3(old_pcs, alz_pcs, old_age, alz_age):
     ax.legend()
     ax.set_xlim(xlim)
     ax.set_ylim(ylim)
-    # ax.set_xlim((78, 101))
-    # ax.set_ylim((-40, 30))
+    ax.set_xlim((78, 101))
+    ax.set_ylim((-40, 30))
     fig.tight_layout()
     fig.savefig(outputpath / 'O_to_AD_1.pdf', bbox_inches='tight')
 
@@ -230,31 +245,36 @@ def fig_2_4(oldy, alzy):
     alz = np.concatenate(alzy)
     old1, old2, old3, old4 = oldy
 
-    bw = 0.3
+    bw = 0.42
     gr = (1+np.sqrt(5))/2
-    h=10
-    w=5*gr
+    h=4.8
+    w=h*gr
     fig, axs = plt.subplots(2, 2, sharex=True, sharey=True, figsize=(w, h))
 
     ax1 = axs[0, 0]
     sns.kdeplot(alz, color=alz_color, fill=True, ax=ax1, label='EA', bw_adjust=bw)
-    sns.kdeplot(old1, color=old_color, fill=True, ax=ax1, label='O', bw_adjust=bw)
+    sns.kdeplot(old1, color=old_color, fill=True, ax=ax1, label='O, 79 < edad < 84', bw_adjust=bw)
     ax1.legend()
+    ax1.set_ylabel('Densidad de probabilidad')
     ax1.set_xlim((-200, 150))
+    ax1.set_ylim((0.0, 0.014))
 
     ax2 = axs[0, 1]
     sns.kdeplot(alz, color=alz_color, fill=True, ax=ax2, label='EA', bw_adjust=bw)
-    sns.kdeplot(old2, color=old_color, fill=True, ax=ax2, label='O', bw_adjust=bw)
+    sns.kdeplot(old2, color=old_color, fill=True, ax=ax2, label='O, 84 < edad < 90', bw_adjust=bw)
     ax2.legend()
 
     ax3 = axs[1, 0]
     sns.kdeplot(alz, color=alz_color, fill=True, ax=ax3, label='EA', bw_adjust=bw)
-    sns.kdeplot(old3, color=old_color, fill=True, ax=ax3, label='O', bw_adjust=bw)
+    sns.kdeplot(old3, color=old_color, fill=True, ax=ax3, label='O, 90 < edad < 95', bw_adjust=bw)
+    ax3.set_xlabel('PC1')
+    ax3.set_ylabel('Densidad de probabilidad')
     ax3.legend()
 
     ax4 = axs[1, 1]
     sns.kdeplot(alz, color=alz_color, fill=True, ax=ax4, label='EA', bw_adjust=bw)
-    sns.kdeplot(old4, color=old_color, fill=True, ax=ax4, label='O', bw_adjust=bw)
+    sns.kdeplot(old4, color=old_color, fill=True, ax=ax4, label='O, 95 < edad < 101', bw_adjust=bw)
+    ax4.set_xlabel('PC1')
     ax4.legend()
 
     fig.savefig(outputpath / 'suppl_otoad.pdf', bbox_inches='tight')
