@@ -223,18 +223,48 @@ def fig_2_3(old_pcs, alz_pcs, old_age, alz_age):
     fig.tight_layout()
     fig.savefig(outputpath / 'O_to_AD_1.pdf', bbox_inches='tight')
 
-    return (o1x, o2x, o3x, o4x), (o1y, o2y, o3y, o4y), (a1x, a2x), (a1y, a2y)
+    return (o1y, o2y, o3y, o4y), (a1y, a2y)
 
 
-def fig_2_4(oldx, oldy, alzx, alzy):
-    pass
+def fig_2_4(oldy, alzy):
+    alz = np.concatenate(alzy)
+    old1, old2, old3, old4 = oldy
+
+    bw = 0.3
+    gr = (1+np.sqrt(5))/2
+    h=10
+    w=5*gr
+    fig, axs = plt.subplots(2, 2, sharex=True, sharey=True, figsize=(w, h))
+
+    ax1 = axs[0, 0]
+    sns.kdeplot(alz, color=alz_color, fill=True, ax=ax1, label='EA', bw_adjust=bw)
+    sns.kdeplot(old1, color=old_color, fill=True, ax=ax1, label='O', bw_adjust=bw)
+    ax1.legend()
+    ax1.set_xlim((-200, 150))
+
+    ax2 = axs[0, 1]
+    sns.kdeplot(alz, color=alz_color, fill=True, ax=ax2, label='EA', bw_adjust=bw)
+    sns.kdeplot(old2, color=old_color, fill=True, ax=ax2, label='O', bw_adjust=bw)
+    ax2.legend()
+
+    ax3 = axs[1, 0]
+    sns.kdeplot(alz, color=alz_color, fill=True, ax=ax3, label='EA', bw_adjust=bw)
+    sns.kdeplot(old3, color=old_color, fill=True, ax=ax3, label='O', bw_adjust=bw)
+    ax3.legend()
+
+    ax4 = axs[1, 1]
+    sns.kdeplot(alz, color=alz_color, fill=True, ax=ax4, label='EA', bw_adjust=bw)
+    sns.kdeplot(old4, color=old_color, fill=True, ax=ax4, label='O', bw_adjust=bw)
+    ax4.legend()
+
+    fig.savefig(outputpath / 'suppl_otoad.pdf', bbox_inches='tight')
 
 
 def main():
     old, alz, old_age, alz_age = read_alz_data()
     old_pcs, alz_pcs = fig_2_2(old, alz)
-    oldx, oldy, alzx, alzy = fig_2_3(old_pcs, alz_pcs, old_age, alz_age)
-    fig_2_4(oldx, oldy, alzx, alzy)
+    oldy, alzy = fig_2_3(old_pcs, alz_pcs, old_age, alz_age)
+    fig_2_4(oldy, alzy)
     plt.show()
 
 if __name__ == '__main__':
