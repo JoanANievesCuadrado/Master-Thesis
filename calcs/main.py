@@ -389,7 +389,7 @@ def figure_1d(normal: np.ndarray, tumor: np.ndarray, alz: np.ndarray, genes: Lis
         categories += [gn] * alz.shape[0]
 
     sns.violinplot(x=groups, y=columns, hue=categories, inner='quart', ax=ax1d)
-    ax1d.axhline(y=0, color='gray', linestyle='-.', linewidth=1.1, alpha=0.5)
+    ax1d.axhline(y=0, color='gray', linestyle='-.', linewidth=1.1, alpha=0.7)
     ax1d.set_ylabel('$log_2(e/e_{ref})$', fontsize=fontsize)
     ax1d.tick_params(axis='x', labelsize=fontsize)
     ax1d.tick_params(axis='y', labelsize=tick_fontsize)
@@ -435,7 +435,7 @@ def figure_1d_2(normal: np.ndarray, tumor: np.ndarray, alz: np.ndarray, genes: L
         categories += [gn] * alz.shape[0]
 
     sns.violinplot(x=groups, y=columns, hue=categories, inner='quart', ax=ax1d)
-    ax1d.axhline(y=0, color='gray', linestyle='-.', linewidth=1.1, alpha=0.5)
+    ax1d.axhline(y=0, color='gray', linestyle='-.', linewidth=1.1, alpha=0.7)
     ax1d.set_ylabel('$log_2(e/e_{ref})$', fontsize=fontsize)
     ax1d.tick_params(axis='x', labelsize=fontsize)
     ax1d.tick_params(axis='y', labelsize=tick_fontsize)

@@ -15,9 +15,16 @@ Sobre la base de nuestros diagramas, podemos formular las siguientes observacion
 
 De hecho, el desplazamiento en esta dirección implica escalar parcialmente las barreras de baja aptitud que separan N de los estados GB y EA, y por lo tanto aumentar el riesgo tanto para GB como para la EA.
 
-Vale la pena observar los principales genes involucrados en este proceso. Para ello, observamos el vector unitario a lo largo del eje PC1. Los genes se clasifican según su contribución al vector unitario. \alert{El procedimiento es similar al algoritmo de Page Rank \cite{Duhan_2009}. Lo usamos en nuestro trabajo anterior \cite{Gonzalez_2023}.}
+Vale la pena observar los principales genes involucrados en este proceso. Para ello, observamos el vector unitario a lo largo del eje PC1. Los genes se clasifican según su contribución al vector unitario.% \alert{El procedimiento es similar al algoritmo de Page Rank \cite{Duhan_2009}. Lo usamos en nuestro trabajo anterior \cite{Gonzalez_2023}.}
 
-En la Tabla \ref{tab:apx3} de los apéndices se encuentra una lista con los 100 primeros genes del \textit{ranking}. Las amplitudes positivas definen genes cuya expresión aumenta con el desplazamiento a lo largo de la dirección positiva de PC1, mientras que las amplitudes negativas se refieren a genes silenciados. Estos genes deberían desempeñar simultáneamente un papel crucial en el envejecimiento, el GB y la EA.
+En la Tabla \ref{tab:apx3} de los apéndices se encuentra una lista con los 100 primeros genes del \textit{ranking}. En la Fig. \ref{fig:figpc1} se representan los 30 primeros genes ordenados por su valor absoluto. Las amplitudes positivas definen genes cuya expresión aumenta con el desplazamiento a lo largo de la dirección positiva de PC1, mientras que las amplitudes negativas se refieren a genes silenciados. Estos genes deberían desempeñar simultáneamente un papel crucial en el envejecimiento, el GB y la EA.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\linewidth]{figures/PC1}
+	\caption{Genes con mayor peso a lo largo del vector PC1.}
+	\label{fig:figpc1}
+\end{figure}
 
 Por supuesto, debido al valor puramente cualitativo de nuestro análisis, los genes, y especialmente el \textit{ranking}, deben considerarse con cautela. Sin embargo, cabe destacar que 20 de los genes silenciados están relacionados con los procesos principales de transmisión a través de sinapsis químicas. En la Tabla \ref{tab:apx4} del Apéndice \ref{apx:apx3} se enumeran los procesos principales del \textit{Reactome} (\href{https://reactome.org/}{https://reactome.org/}) asociadas a estos genes \cite{Gillespie_2021}. Este conjunto incluye 56 genes anotados.
 
@@ -29,7 +36,14 @@ La disminución de la función sináptica es una característica conocida del ce
 
 De hecho, la EA y el GB aparecen en semiplanos opuestos. La evidencia clínica \cite{ou2012does, Driver_2012, Roe_2010, Musicco_2013} y los estudios de biología molecular \cite{Liu_2013, Lanni_2020} respaldan esta disyunción. En consecuencia, el eje PC2 involucra genes con desregulación inversa en la EA y el GB.
 
-En la Tabla \ref{tab:apx5} de los apéndices, se listan los 100 genes principales definidos por el vector unitario a lo largo del eje PC2. Los pesos positivos corresponden a genes cuya expresión aumenta en la transición de N a la EA. Por otro lado, las amplitudes negativas corresponden a genes cuya expresión aumenta en la transición de N a GB.
+En la Tabla \ref{tab:apx5} de los apéndices, se listan los 100 genes principales definidos por el vector unitario a lo largo del eje PC2. En la Fig. \ref{fig:figpc2} se muestran los 30 primeros genes ordenados por su valor absoluto. Los pesos positivos corresponden a genes cuya expresión aumenta en la transición de N a la EA. Por otro lado, las amplitudes negativas corresponden a genes cuya expresión aumenta en la transición de N a GB.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\linewidth]{figures/PC2}
+	\caption{Genes con mayor peso a lo largo del vector PC2.}
+	\label{fig:figpc2}
+\end{figure}
 
 Los procesos de \textit{Reactome} relacionadas con estos genes se muestran en la Tabla \ref{tab:apx6} del Apéndice \ref{apx:apx5}. Se relacionan principalmente con el control del ciclo celular, la replicación del ADN, la apoptosis, la modificación de la matriz extracelular, etc., es decir, con las características distintivas del cáncer \cite{Hanahan_2000, Hanahan_2011, Hanahan_2022}.
 
