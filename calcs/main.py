@@ -280,39 +280,6 @@ def figure_1c(normal: np.ndarray, tumor: np.ndarray, alz: np.ndarray):
 
     white_outline = withStroke(linewidth=3, foreground='white')
 
-    # # Calculate the minimum and maximum of Z
-    # z_min, z_max = 0, Z.max()
-    # # Define a threshold below which you want more levels.
-    # # Here, we choose a value at 20% of the range above the minimum.
-    # low_threshold = z_min + 0.01 * (z_max - z_min)
-    
-    # # Create many levels for the low value region and fewer for the high region.
-    # low_levels = np.linspace(z_min, low_threshold, 5)  # Denser in low values
-    # high_levels = np.linspace(low_levels[-1], z_max, 75)    # Sparser in the remaining range
-    # low_levels = low_levels[:-1]
-
-    # print(f'{low_levels = }')
-    # print(f'{high_levels = }')
-    
-    # # Combine the two sets of levels into one list.
-    # levels = np.concatenate([low_levels, high_levels])
-    # print(f'{np.min(Z) = }, {np.max(Z) = }')
-
-    # # Avoid taking the logarithm of zero:
-    # nonzero_Z = Z[Z > 0]
-    # if nonzero_Z.size == 0:
-    #     # If Z somehow has no positive values, provide a fallback.
-    #     min_val = 1e-10
-    # else:
-    #     min_val = nonzero_Z.min()
-    # max_val = Z.max()
-
-    # # Create a logarithmically spaced progression of levels.
-    # # The number of levels (here, 200) can be adjusted for your preferred level density.
-    # levels = np.logspace(np.log10(min_val), np.log10(max_val), 150)
-
-    # --- Build custom levels ---
-    # Ensure that only positive values are used for the log spacing.
     nonzero_Z = Z[Z > 0]
     if nonzero_Z.size == 0:
         raise ValueError("Z does not contain any positive values; cannot use log spacing.")
@@ -323,24 +290,21 @@ def figure_1c(normal: np.ndarray, tumor: np.ndarray, alz: np.ndarray):
     log_threshold = min_val + 0.0135 * (max_val - min_val)
 
     # Create the log-spaced levels in the "low" region.
-    num_log_levels = 4  # Number of levels in the log-spaced (low) region
+    num_log_levels = 4
     log_levels = np.logspace(np.log10(min_val), np.log10(log_threshold), num=num_log_levels)
 
     # Calculate the step between the last two log levels.
     gap = log_levels[-1] - log_levels[-2]
 
     # Create linear-spaced levels in the high region.
-    # The first level of the high region will be (last-log-level + gap) to maintain a continuous spacing.
     linear_levels = np.arange(log_levels[-1] + gap, max_val, gap)
     
     # Make sure the very last value is included.
     if linear_levels.size == 0 or linear_levels[-1] < max_val:
         linear_levels = np.append(linear_levels, max_val)
 
-    # Combine the log and linear parts.
     levels = np.concatenate([log_levels, linear_levels])
-    # --- End build custom levels ---
-    
+
     ax1c.contour(X, Y, Z, levels=levels, cmap='gray')
 
     ax1c.annotate('N', xy=normal_center, c=normal_color, va='bottom', ha='left', size=12,
