@@ -476,3 +476,4 @@ cython_debug/
 calcs/data/ALZ/fpkm_table_normalized.csv
 calcs/data/TCGA-GBM/data/
 calcs/data/Mouse/data/
+comments/*
