@@ -31,7 +31,7 @@
 
 \usepackage[utf8]{inputenc} % Any characters can be typed directly from the keyboard
 %\usepackage[T1]{fontenc}
-\usepackage[spanish]{babel}
+\usepackage[spanish, english]{babel}
 \usepackage{color}
 \usepackage{xcolor}
 \usepackage{colortbl}
@@ -105,6 +105,7 @@
     \renewcommand{\figurename}{Figura}
 
     \renewcommand{\thefootnote}{\Roman{footnote}}
+    
 
     \lefthyphenmin=2
     \righthyphenmin=2
@@ -153,8 +154,11 @@
 	\backmatter
 
 	\singlespacing
+%	\selectlanguage{english}
+%	\renewcommand{\refname}{Bibliografía}
 	\bibliographystyle{ieeetr}  % or: plain,unsrt,alpha,abbrv,acm,apalike, ieeetr,..
 	%    \bibliographystyle{phd_bib}	% definir el estilo de la bibliografía .bst (phd_bib,mibib)
+
 	\bibliography{bibl} 	% ejemplo. hacer uno genérico. Solo pone las que se citan.
 	%    \bibliography{test}
 	%    \nocite{*}

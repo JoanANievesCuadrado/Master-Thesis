@@ -21,7 +21,7 @@ En la figura se pueden apreciar 4 grupos de muestras. Las muestras marcadas como
 
 Por otro lado, los grupos etiquetados como EA y O corresponden a las muestras de la materia blanca del cerebro de la enfermedad del Alzheimer y del grupo de control (\textit{old}) en el estudio del Instituto Allen \cite{Miller_2017}. 
 
-La Fig. \ref{fig:pcaotoad} es una reconstrucción de la figura 3 de la referencia \cite{Gonzalez_2021}. En esta se muestra los resultados del PCA para los datos de expresión genética de la materia blanca del cerebro del Instituto Allen. La primera componente principal (PC1), la cual contiene el $24.7 \%$ de la varianza total, discrimina entre las muestra de O y EA. La posición del centro de la nube de O en este eje es $\left\langle x_1 \right\rangle  = 0 $, y para la EA es $\left\langle x_1 \right\rangle = 40.97 $. Sin embargo, los radios de las nubes de las muestras de O y EA son más grandes que la distancia entre los centros, que son $80.69$ y $72.64$ respectivamente.
+La Fig. \ref{fig:pcaotoad} es una reconstrucción de la figura 3a de la referencia \cite{Gonzalez_2021}. En esta se muestran los resultados del PCA para los datos de expresión genética de la materia blanca del cerebro del Instituto Allen. La primera componente principal (PC1), la cual contiene el $24.7 \%$ de la varianza total, discrimina entre las muestra de O y EA. La posición del centro de la nube de O en este eje es $\left\langle x_1 \right\rangle  = 0 $, y para la EA es $\left\langle x_1 \right\rangle = 40.97 $. Sin embargo, los radios de las nubes de las muestras de O y EA son más grandes que la distancia entre los centros, que son $80.69$ y $72.64$ respectivamente.
 %\alert{Estudiamos la transición de O hacia EA en la referencia \cite{Gonzalez_2021}}. En la Fig. \ref{fig:otoad}
 
 \begin{figure}[!htb]
@@ -32,18 +32,16 @@ La Fig. \ref{fig:pcaotoad} es una reconstrucción de la figura 3 de la referenci
 	\label{fig:pcaotoad}
 \end{figure}
 
-Es bien conocido el papel de la edad en la EA, especialmente en ancianos \cite{alz2019}. Por lo tanto, podemos usar la edad como una variable de tiempo para seguir la transición. A pesar del número relativamente pequeño de muestras, se realizó un análisis de regresión lineal de la posición media de $\left\langle x_1 \right\rangle$ en función de la edad en las muestras de O, Fig. \ref{fig:otoad}, muestra que $\left\langle x_1 \right\rangle = -287.12 + 3.24 \cdot edad$. En las muestras de la EA, sin embargo, no se encontró correlación entre $\left\langle x_1 \right\rangle$ y la edad observada. Por lo tanto, la posición de la zona EA es aproximadamente fija, y la nube de muestras de O muestra una deriva hacia el mínimo de EA a medida que aumenta la edad.
+Es bien conocido el papel de la edad en la EA, especialmente en ancianos \cite{alz2019}. Por lo tanto, podemos usar la edad como una variable de tiempo para seguir la transición. A pesar del número relativamente pequeño de muestras, se realizó un análisis de regresión lineal de la posición media de $\left\langle x_1 \right\rangle$ en función de la edad en las muestras de O, Fig. \ref{fig:otoad}. Esta figura es una reproducción de la 4a de la referencia \cite{Gonzalez_2021} y en la cual se ilustra que $\left\langle x_1 \right\rangle = -287.12 + 3.24 \cdot edad$. En las muestras de la EA, sin embargo, no se encontró correlación entre $\left\langle x_1 \right\rangle$ y la edad observada. Por lo tanto, la posición de la zona EA es aproximadamente fija, y la nube de muestras de O evidencia una deriva hacia el mínimo de la EA a medida que aumenta la edad.
 
 \begin{figure}[!htb]
-	%TODO
 	\centering
 	\includegraphics[width=0.75\linewidth]{figures/O_to_AD_1}
 	\caption{Posición media de la muestra a lo largo del eje PC1 en función de la edad. A medida que aumenta la edad, las muestras de O experimentan una deriva hacia la región de la EA, cuyo centro es aproximadamente independiente de la edad. Tomada de la referencia \cite{Gonzalez_2021}.}
 	\label{fig:otoad}
 \end{figure}
 
-Una mejor ilustración de este hecho viene representada en la Fig. \ref{fig:supplotoad}, donde se compara la densidad de probabilidad de las muestras de O y de la EA. Se definen cuatro intervalos de edades, que contienen aproximadamente la misma cantidad de muestras de O: [77, 84], [84, 90], [90, 95], [95, 100+]. La probabilidad total de las muestras de la EA es mostrada en los cuatro paneles. Es aparente un desplazamiento de las muestras de O hacia la zona de la EA.
-
+Una mejor ilustración de este hecho viene representada en la Fig. \ref{fig:supplotoad}, donde se compara la densidad de probabilidad de las muestras de O y de la EA. Esta reproduce la imagen S2 del material suplementario de la referencia \cite{Gonzalez_2021}. Para construir dicha figura, se definieron cuatro intervalos de edades, que contienen aproximadamente la misma cantidad de muestras de O: [77, 84], [84, 90], [90, 95], [95, 100+]. La probabilidad total de las muestras de la EA es mostrada en los cuatro paneles. El solapamiento creciente entre las densidades de probabilidad evidencia una transición gradual de las muestras del grupo O hacia valores característicos del grupo EA.
 
 \begin{figure}[!htb]
 	%TODO: hacer un replot de la figura
