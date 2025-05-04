@@ -1,6 +1,6 @@
 % !TeX root = Tesis.tex
 % !TeX encoding = UTF-8
-% !TeX spellcheck = es
+% !TeX spellcheck = es_CU-SpanishCuba
 \chapter{Resultados}
 \label{cap3}
 \onehalfspacing
@@ -13,7 +13,7 @@ Sobre la base de nuestros diagramas, podemos formular las siguientes observacion
 	\item  \textbf{Existe una dirección en el espacio de expresión genética, que a grandes rasgos se puede identificar con el eje PC1, asociada al envejecimiento y a un aumento del riesgo de padecer GB y la EA.}
 \end{enumerate}
 
-De hecho, el desplazamiento en esta dirección implica escalar parcialmente las barreras de baja aptitud que separan N de los estados GB y EA, y por lo tanto aumentar el riesgo tanto para GB como para la EA.
+De hecho, el desplazamiento en esta dirección implica escalar parcialmente las barreras de bajo \textit{fitness} que separan N de los estados GB y EA, y por lo tanto aumentar el riesgo tanto para GB como para la EA.
 
 Vale la pena observar los principales genes involucrados en este proceso. Para ello, observamos el vector unitario a lo largo del eje PC1. Los genes se clasifican según su contribución al vector unitario.% \alert{El procedimiento es similar al algoritmo de Page Rank \cite{Duhan_2009}. Lo usamos en nuestro trabajo anterior \cite{Gonzalez_2023}.}
 
@@ -66,7 +66,7 @@ En nuestros datos, existen muestras en la región N y muestras correspondientes 
 
 En lugar de incluir muestras adicionales en nuestra figura, lo cual introduciría efectos de lote adicionales, utilizamos resultados recientes en un modelo de ratón \cite{hahn2023atlas} que muestran indudablemente un corredor continuo para el envejecimiento. Presentamos en la Fig. \ref{fig:suppl1} del Apéndice \ref{apx:apx1} una representación gráfica de sus datos para el cuerpo calloso, una región rica en materia blanca. En el panel izquierdo, se grafican las dos primeras componentes principales para los centros de los subgrupos de muestras. Se consideran edades de ratón entre 3 y 28 meses; este último equivale aproximadamente a 80 años en una escala humana. Un corredor para el envejecimiento es evidente. El panel derecho, por otro lado, muestra distancias reales incluyendo todos los componentes. Por lo tanto, las proyecciones en el plano (PC1, PC2) son una representación fiel de la distribución real de puntos.
 
-En nuestro esquema (Fig. \ref{fig:fig1b}), se delinea un corredor de envejecimiento. La Fig. \ref{fig:fig1c} sugiere que este corredor es una dirección con una mínima disminución de la aptitud.
+En nuestro esquema (Fig. \ref{fig:fig1b}), se delinea un corredor de envejecimiento. La Fig. \ref{fig:fig1c} sugiere que este corredor es una dirección con una mínima disminución del \textit{fitness}.
 
 Una dirección o corredor preferencial para el envejecimiento es consistente con la hipótesis del envejecimiento programado \cite{Magalh_es_2012, Gems_2022}, es decir, la idea de que el envejecimiento está programado en nuestros genes.
 
@@ -78,7 +78,7 @@ Una pregunta muy interesante se refiere a la selección de la dirección preferi
 
 De hecho, para cada pequeña porción de tejido, se puede modelar el envejecimiento como una especie de movimiento aleatorio que comienza en la región N. Obsérvese que en la referencia \cite{Herrero_2022} se utilizó un modelo de saltos aleatorios en el espacio de expresión genética para describir la evolución somática de diferentes tejidos hacia el cáncer. Primero, asumimos que la dirección de los saltos es aleatoria en el plano que se muestra en la Fig. \ref{fig:fig1c}.
 
-Solo existen cuatro posibilidades para el destino de las trayectorias aleatorias en el plano que comienzan en la región N. Primero, la trayectoria permanece en la región N. Segundo, llega a una región de aptitud física muy baja y las células mueren. Este es el destino de muchas células en el cerebro envejecido. Tercero, es capturada por el atractor GB. Y, finalmente, la cuarta posibilidad es la captura por el atractor de la EA.
+Solo existen cuatro posibilidades para el destino de las trayectorias aleatorias en el plano que comienzan en la región N. Primero, la trayectoria permanece en la región N. Segundo, llega a una región de \textit{fitness} muy baja y las células mueren. Este es el destino de muchas células en el cerebro envejecido. Tercero, es capturada por el atractor GB. Y, finalmente, la cuarta posibilidad es la captura por el atractor de la EA.
 
 Debido al elevado valor de \textit{fitness} del atractor GB, debería existir una probabilidad relativamente alta de que las trayectorias sean capturadas por el GB, lo que conduce a la iniciación de un tumor. Esto implica un enorme aumento del \textit{fitness}, la propagación del tumor en el cerebro y una esperanza de vida para el individuo de tan solo unos dos años tras la iniciación \cite{Poon_2020}. Esto podría afectar a los individuos en edad reproductiva. Por lo tanto, evitar el atractor GB podría ser objeto de la presión selectiva.
 
