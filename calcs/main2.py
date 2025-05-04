@@ -253,7 +253,7 @@ def fig_2_4(oldy, alzy):
 
     ax1 = axs[0, 0]
     sns.kdeplot(alz, color=alz_color, fill=True, ax=ax1, label='EA', bw_adjust=bw)
-    sns.kdeplot(old1, color=old_color, fill=True, ax=ax1, label='O, 79 < edad < 84', bw_adjust=bw)
+    sns.kdeplot(old1, color=old_color, fill=True, ax=ax1, label='O, 77 < edad < 84', bw_adjust=bw)
     ax1.legend()
     ax1.set_ylabel('Densidad de probabilidad')
     ax1.set_xlim((-200, 150))
