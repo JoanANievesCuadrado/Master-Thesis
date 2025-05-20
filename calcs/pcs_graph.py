@@ -21,7 +21,7 @@ def pci_graph(pc, pcn):
     fig, ax = plt.subplots(figsize=(8, 4))
 
     # Enumerate through values and genes
-    colors = ['b' if v > 0 else 'r' for v in pc.value]
+    colors = ['r' if v > 0 else 'b' for v in pc.value]
 
     # Plot points and lines
     for i, (v, color) in enumerate(zip(pc.value, colors), start=1):
